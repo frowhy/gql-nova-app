@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "54a3ecfc8667f9199b197d010bae398d",
+    "content-hash": "0c8fab08b4d7258e3ba69a01105d8ff0",
     "packages": [
         {
             "name": "cakephp/chronos",
@@ -500,6 +500,40 @@
                 "MIT"
             ],
             "description": "A Laravel Nova field.",
+            "keywords": [
+                "laravel",
+                "nova"
+            ]
+        },
+        {
+            "name": "frowhy/nova-theme-clean",
+            "version": "dev-feature/merge-nova",
+            "dist": {
+                "type": "path",
+                "url": "./nova-themes/NovaThemeClean",
+                "reference": "2dcc88d6688becbe013dd48ffa3fe7d12de38364",
+                "shasum": null
+            },
+            "require": {
+                "php": ">=7.1.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Frowhy\\NovaThemeClean\\ThemeServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Frowhy\\NovaThemeClean\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "A Laravel Nova theme.",
             "keywords": [
                 "laravel",
                 "nova"

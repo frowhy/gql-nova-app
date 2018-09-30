@@ -10,7 +10,8 @@
         "laravel/framework": "5.6.*",
         "laravel/tinker": "^1.0",
         "laravel/nova": "~1.0",
-        "frowhy/nova-field-quill": "*"
+        "frowhy/nova-field-quill": "*",
+        "frowhy/nova-theme-clean": "*"
     },
     "require-dev": {
         "filp/whoops": "^2.0",
@@ -66,6 +67,10 @@
         {
             "type": "path",
             "url": "./nova-components/NovaFieldQuill"
+        },
+        {
+            "type": "path",
+            "url": "./nova-themes/NovaThemeClean"
         }
     ]
 }
