@@ -1,3 +1,6 @@
 [submodule "nova-components/NovaFieldQuill"]
 	path = nova-components/NovaFieldQuill
 	url = git@github.com:frowhy/nova-field-quill.git
+[submodule "nova-themes/NovaThemeClean"]
+	path = nova-themes/NovaThemeClean
+	url = git@github.com:frowhy/nova-theme-clean.git
