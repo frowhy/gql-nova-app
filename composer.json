@@ -9,7 +9,10 @@
         "fideloper/proxy": "^4.0",
         "itsgoingd/clockwork": "^3.0",
         "laravel/framework": "5.6.*",
-        "laravel/tinker": "^1.0"
+        "laravel/tinker": "^1.0",
+        "laravel/nova": "~1.0",
+        "frowhy/nova-field-quill": "*",
+        "frowhy/nova-theme-clean": "*"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.5",
@@ -58,5 +61,19 @@
         "optimize-autoloader": true
     },
     "minimum-stability": "dev",
-    "prefer-stable": true
+    "prefer-stable": true,
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://nova.laravel.com"
+        },
+        {
+            "type": "path",
+            "url": "./nova-components/NovaFieldQuill"
+        },
+        {
+            "type": "path",
+            "url": "./nova-themes/NovaThemeClean"
+        }
+    ]
 }
