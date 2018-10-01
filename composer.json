@@ -13,6 +13,7 @@
         "laravel/tinker": "^1.0",
         "mll-lab/laravel-graphql-playground": "^0.3.3",
         "laravel/nova": "~1.0",
+        "frowhy/graphql-register": "*",
         "frowhy/nova-field-quill": "*",
         "frowhy/nova-theme-clean": "*",
         "tymon/jwt-auth": "^1.0"
@@ -69,6 +70,10 @@
         {
             "type": "composer",
             "url": "https://nova.laravel.com"
+        },
+        {
+            "type": "path",
+            "url": "./.ignore/graphql-register"
         },
         {
             "type": "path",

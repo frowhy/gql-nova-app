@@ -4,21 +4,21 @@ namespace App\GraphQL\Mutation;
 
 use Folklore\GraphQL\Error\AuthorizationError;
 use Folklore\GraphQL\Support\Mutation;
+use GraphQL;
 use GraphQL\Type\Definition\ResolveInfo;
 use GraphQL\Type\Definition\Type;
-use GraphQL;
-use Illuminate\Support\Facades\Auth;
+use JWTAuth;
 
-class SignMutation extends Mutation
+class SignInMutation extends Mutation
 {
     protected $attributes = [
-        'name'        => 'SignMutation',
-        'description' => 'A mutation for user login',
+        'name'        => 'SignInMutation',
+        'description' => 'A mutation for user sign in',
     ];
 
     public function type()
     {
-        return GraphQL::type('UserType');
+        return GraphQL::type('AccessTokenType');
     }
 
     public function args()
@@ -52,11 +52,15 @@ class SignMutation extends Mutation
             'email'    => $args['email'],
             'password' => $args['password'],
         ];
-        if (!$token = \JWTAuth::attempt($credentials)) {
+        if (!$accessToken = JWTAuth::attempt($credentials)) {
             throw new AuthorizationError('Invalid Credentials.');
         }
-        $user        = Auth::user();
-        $user->token = $token;
-        return $user;
+
+        return [
+            'accessToken'       => $accessToken,
+            'authorizationType' => 'Bearer',
+            'createdAt'         => time(),
+            'ttl'               => JWTAuth::factory()->getTTL(),
+        ];
     }
 }

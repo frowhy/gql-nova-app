@@ -3,9 +3,10 @@
 namespace App\GraphQL\Mutation;
 
 use Folklore\GraphQL\Support\Mutation;
-use GraphQL\Type\Definition\ResolveInfo;
-use GraphQL\Type\Definition\Type;
 use GraphQL;
+use GraphQL\Type\Definition\ResolveInfo;
+use JWTAuth;
+use Tymon\JWTAuth\Exceptions\JWTException;
 
 class AuthTestMutation extends Mutation
 {
@@ -35,6 +36,10 @@ class AuthTestMutation extends Mutation
 
     public function authenticated($root, $args, $context)
     {
-        return \JWTAuth::parseToken()->authenticate() ? true : false;
+        try {
+            return JWTAuth::parseToken()->authenticate() ? true : false;
+        } catch (JWTException $e) {
+            return false;
+        }
     }
 }
