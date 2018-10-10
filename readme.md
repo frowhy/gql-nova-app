@@ -29,11 +29,11 @@ $ php artisan serve
 // Register Schema
 GraphQL::addSchema('default', [
     'query'    => [
-        'users' => '\App\GraphQL\Query\UsersQuery',
+        'users' => 'App\GraphQL\Query\UsersQuery',
     ],
     'mutation' => [
-        'signIn'   => '\App\GraphQL\Mutation\SignInMutation',
-        'authTest' => '\App\GraphQL\Mutation\AuthTestMutation',
+        'signIn'   => 'App\GraphQL\Mutation\SignInMutation',
+        'authTest' => 'App\GraphQL\Mutation\AuthTestMutation',
     ],
 ]);
 // Register Types
