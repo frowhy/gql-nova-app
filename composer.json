@@ -1,9 +1,11 @@
 {
-    "name": "laravel/laravel",
-    "description": "The Laravel Framework.",
+    "name": "frowhy/gql-nova-app",
+    "description": "A Nova application built by GraphQL",
     "keywords": [
         "framework",
-        "laravel"
+        "laravel",
+        "Nova",
+        "GraphQL"
     ],
     "license": "MIT",
     "type": "project",
