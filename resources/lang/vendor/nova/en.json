@@ -355,5 +355,7 @@
     "Action Initiated By": "Initiated By",
     "Action Target": "Target",
     "Action Status": "Status",
-    "Action Happened At": "Happened At"
+    "Action Happened At": "Happened At",
+    "viewPosts": "View Posts",
+    "managePosts": "Manage Posts"
 }
