@@ -21,6 +21,8 @@ class CreatePostsTable extends Migration
             $table->longText('content')->nullable();
             $table->string('seo_title')->nullable();
             $table->text('seo_description')->nullable();
+            $table->boolean('is_external_link')->default(0);
+            $table->string('external_link')->nullable();
             $table->timestamps();
         });
     }

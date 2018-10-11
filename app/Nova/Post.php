@@ -4,11 +4,13 @@ namespace App\Nova;
 
 use CustomConfiguration\ResourceLabel;
 use Ebess\AdvancedNovaMediaLibrary\Fields\Images;
+use Epartment\NovaDependencyContainer\NovaDependencyContainer;
 use Frowhy\NovaFieldQuill\NovaFieldQuill;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\ID;
 use Illuminate\Http\Request;
+use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Panel;
@@ -19,6 +21,15 @@ class Post extends Resource
     use ResourceLabel;
 
     public static $label = '帖子';
+
+    /**
+     * The relationship columns that should be searched.
+     *
+     * @var array
+     */
+    public static $searchRelations = [
+        'user' => ['name', 'email'],
+    ];
 
     /**
      * The model the resource corresponds to.
@@ -59,11 +70,25 @@ class Post extends Resource
 
             Images::make('图片', 'post')->multiple(),
 
-            NovaFieldQuill::make('内容', 'content'),
+            Select::make('是否启用外部链接', 'is_external_link')
+                ->hideFromIndex()
+                ->options([
+                              0 => '不启用',
+                              1 => '启用',
+                          ])
+                ->displayUsingLabels(),
+
+            NovaDependencyContainer::make([
+                                              NovaFieldQuill::make('内容', 'content')->hideFromIndex(),
+                                          ])->dependsOn('is_external_link', 0),
+
+            NovaDependencyContainer::make([
+                                              Text::make('外部链接', 'external_link')->hideFromIndex(),
+                                          ])->dependsOn('is_external_link', 1),
 
             new Panel('SEO 字段', $this->seoFields()),
 
-            BelongsTo::make('User')->searchable(),
+            BelongsTo::make('用户', 'user', User::class)->searchable(),
 
             DateTime::make('创建时间', 'created_at')->sortable()->onlyOnDetail(),
 

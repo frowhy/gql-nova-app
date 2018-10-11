@@ -2,12 +2,15 @@
 
 namespace App\Providers;
 
+use Beyondcode\TinkerTool\Tinker;
+use Cloudstudio\ResourceGenerator\ResourceGenerator;
 use Infinety\Filemanager\FilemanagerTool;
 use Laravel\Nova\Nova;
 use Laravel\Nova\Cards\Help;
 use Illuminate\Support\Facades\Gate;
 use Laravel\Nova\NovaApplicationServiceProvider;
 use Silvanite\NovaToolPermissions\NovaToolPermissions;
+use Vink\CacheCard\CacheCard;
 
 class NovaServiceProvider extends NovaApplicationServiceProvider
 {
@@ -58,7 +61,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
     protected function cards()
     {
         return [
-            new Help,
+            new CacheCard,
         ];
     }
 
@@ -70,8 +73,10 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
     public function tools()
     {
         return [
-            new NovaToolPermissions(),
-            new FilemanagerTool(),
+            new NovaToolPermissions,
+            new FilemanagerTool,
+            new ResourceGenerator,
+            new Tinker,
         ];
     }
 
