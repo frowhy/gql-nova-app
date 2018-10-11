@@ -72,10 +72,10 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
     public function tools()
     {
         return [
-            new NovaToolPermissions(),
-            new FilemanagerTool(),
-            new ResourceGenerator(),
-            new Tinker(),
+            new NovaToolPermissions,
+            new FilemanagerTool,
+            new ResourceGenerator,
+            new Tinker,
         ];
     }
 
