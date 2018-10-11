@@ -4,11 +4,12 @@ namespace App\Models;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Silvanite\Brandenburg\Traits\HasRoles;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
 class User extends Authenticatable implements JWTSubject
 {
-    use Notifiable;
+    use HasRoles, Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -51,5 +52,10 @@ class User extends Authenticatable implements JWTSubject
     public function getJWTCustomClaims()
     {
         return [];
+    }
+
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
     }
 }

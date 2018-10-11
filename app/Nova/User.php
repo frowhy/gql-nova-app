@@ -2,14 +2,22 @@
 
 namespace App\Nova;
 
+use CustomConfiguration\ResourceLabel;
+use Laravel\Nova\Fields\BelongsToMany;
+use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\ID;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Gravatar;
 use Laravel\Nova\Fields\Password;
+use Silvanite\NovaToolPermissions\Role;
 
 class User extends Resource
 {
+    use ResourceLabel;
+
+    public static $label = '用户';
+
     /**
      * The model the resource corresponds to.
      *
@@ -36,7 +44,8 @@ class User extends Resource
     /**
      * Get the fields displayed by the resource.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
+     *
      * @return array
      */
     public function fields(Request $request)
@@ -44,29 +53,34 @@ class User extends Resource
         return [
             ID::make()->sortable(),
 
-            Gravatar::make(),
+            Gravatar::make('头像'),
 
-            Text::make('Name')
+            Text::make('姓名', 'name')
                 ->sortable()
                 ->rules('required', 'max:255'),
 
-            Text::make('Email')
+            Text::make('邮箱', 'email')
                 ->sortable()
                 ->rules('required', 'email', 'max:254')
                 ->creationRules('unique:users,email')
                 ->updateRules('unique:users,email,{{resourceId}}'),
 
-            Password::make('Password')
+            Password::make('密码', 'password')
                 ->onlyOnForms()
                 ->creationRules('required', 'string', 'min:6')
                 ->updateRules('nullable', 'string', 'min:6'),
+
+            BelongsToMany::make('角色', 'roles', Role::class),
+
+            HasMany::make('Posts'),
         ];
     }
 
     /**
      * Get the cards available for the request.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
+     *
      * @return array
      */
     public function cards(Request $request)
@@ -77,7 +91,8 @@ class User extends Resource
     /**
      * Get the filters available for the resource.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
+     *
      * @return array
      */
     public function filters(Request $request)
@@ -88,7 +103,8 @@ class User extends Resource
     /**
      * Get the lenses available for the resource.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
+     *
      * @return array
      */
     public function lenses(Request $request)
@@ -99,7 +115,8 @@ class User extends Resource
     /**
      * Get the actions available for the resource.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
+     *
      * @return array
      */
     public function actions(Request $request)
