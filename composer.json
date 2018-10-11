@@ -27,6 +27,7 @@
         "laravel/tinker": "^1.0",
         "mll-lab/laravel-graphql-playground": "^0.3.3",
         "silvanite/novatoolpermissions": "^1.0",
+        "sixlive/nova-text-copy-field": "^1.0",
         "spatie/laravel-tags": "^2.1",
         "spatie/nova-tags-field": "^1.1",
         "tymon/jwt-auth": "^1.0"
