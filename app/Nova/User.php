@@ -11,6 +11,7 @@ use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Gravatar;
 use Laravel\Nova\Fields\Password;
 use Silvanite\NovaToolPermissions\Role;
+use Sixlive\TextCopy\TextCopy;
 
 class User extends Resource
 {
@@ -59,7 +60,7 @@ class User extends Resource
                 ->sortable()
                 ->rules('required', 'max:255'),
 
-            Text::make('邮箱', 'email')
+            TextCopy::make('邮箱', 'email')
                 ->sortable()
                 ->rules('required', 'email', 'max:254')
                 ->creationRules('unique:users,email')
