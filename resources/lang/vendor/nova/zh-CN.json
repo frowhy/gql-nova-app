@@ -467,5 +467,7 @@
     "Restart": "重新开始",
     "Generate Resources": "生成的资",
     "Overwrite!": "覆盖!",
-    "Please check all data. You have some mandatory field": "请检查所有数据。有一些强制字段"
+    "Please check all data. You have some mandatory field": "请检查所有数据。有一些强制字段",
+    "Resource could not be exported.": "无法导出资源。",
+    "Resource was successfully exported.": "成功导出资源。"
 }

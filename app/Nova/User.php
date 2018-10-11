@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Gravatar;
 use Laravel\Nova\Fields\Password;
+use Maatwebsite\LaravelNovaExcel\Actions\DownloadExcel;
 use Silvanite\NovaToolPermissions\Role;
 use Sixlive\TextCopy\TextCopy;
 
@@ -122,6 +123,10 @@ class User extends Resource
      */
     public function actions(Request $request)
     {
-        return [];
+        return [
+            (new DownloadExcel)
+                ->only('id', 'name', 'email')
+                ->withHeadings('#', '姓名', '邮箱'),
+        ];
     }
 }
