@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Cloudstudio\ResourceGenerator\ResourceGenerator;
 use Infinety\Filemanager\FilemanagerTool;
 use Laravel\Nova\Nova;
 use Laravel\Nova\Cards\Help;
@@ -72,6 +73,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
         return [
             new NovaToolPermissions(),
             new FilemanagerTool(),
+            new ResourceGenerator(),
         ];
     }
 
