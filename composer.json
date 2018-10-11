@@ -31,6 +31,7 @@
         "sixlive/nova-text-copy-field": "^1.0",
         "spatie/laravel-tags": "^2.1",
         "spatie/nova-tags-field": "^1.1",
+        "titasgailius/search-relations": "^1.0",
         "tymon/jwt-auth": "^1.0"
     },
     "require-dev": {

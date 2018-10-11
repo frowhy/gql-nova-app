@@ -23,6 +23,15 @@ class Post extends Resource
     public static $label = '帖子';
 
     /**
+     * The relationship columns that should be searched.
+     *
+     * @var array
+     */
+    public static $searchRelations = [
+        'user' => ['name', 'email'],
+    ];
+
+    /**
      * The model the resource corresponds to.
      *
      * @var string
