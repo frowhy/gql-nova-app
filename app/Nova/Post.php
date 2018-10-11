@@ -3,6 +3,7 @@
 namespace App\Nova;
 
 use CustomConfiguration\ResourceLabel;
+use Ebess\AdvancedNovaMediaLibrary\Fields\Images;
 use Frowhy\NovaFieldQuill\NovaFieldQuill;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\DateTime;
@@ -55,6 +56,8 @@ class Post extends Resource
             ID::make()->sortable(),
 
             Text::make('标题', 'title'),
+
+            Images::make('图片', 'post')->multiple(),
 
             NovaFieldQuill::make('内容', 'content'),
 
