@@ -3,34 +3,35 @@
 namespace App\Nova;
 
 use CustomConfiguration\ResourceLabel;
-use Laravel\Nova\Fields\BelongsToMany;
-use Laravel\Nova\Fields\HasMany;
+use Frowhy\NovaFieldQuill\NovaFieldQuill;
+use Laravel\Nova\Fields\BelongsTo;
+use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\ID;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\Text;
-use Laravel\Nova\Fields\Gravatar;
-use Laravel\Nova\Fields\Password;
-use Silvanite\NovaToolPermissions\Role;
+use Laravel\Nova\Fields\Textarea;
+use Laravel\Nova\Panel;
+use Spatie\TagsField\Tags;
 
-class User extends Resource
+class Post extends Resource
 {
     use ResourceLabel;
 
-    public static $label = '用户';
+    public static $label = '帖子';
 
     /**
      * The model the resource corresponds to.
      *
      * @var string
      */
-    public static $model = 'App\\Models\\User';
+    public static $model = 'App\Models\Post';
 
     /**
      * The single value that should be used to represent the resource when being displayed.
      *
      * @var string
      */
-    public static $title = 'name';
+    public static $title = 'title';
 
     /**
      * The columns that should be searched.
@@ -38,7 +39,7 @@ class User extends Resource
      * @var array
      */
     public static $search = [
-        'id', 'name', 'email',
+        'id', 'title', 'seo_title', 'seo_description',
     ];
 
     /**
@@ -53,26 +54,17 @@ class User extends Resource
         return [
             ID::make()->sortable(),
 
-            Gravatar::make('头像'),
+            Text::make('标题', 'title'),
 
-            Text::make('姓名', 'name')
-                ->sortable()
-                ->rules('required', 'max:255'),
+            NovaFieldQuill::make('内容', 'content'),
 
-            Text::make('邮箱', 'email')
-                ->sortable()
-                ->rules('required', 'email', 'max:254')
-                ->creationRules('unique:users,email')
-                ->updateRules('unique:users,email,{{resourceId}}'),
+            new Panel('SEO 字段', $this->seoFields()),
 
-            Password::make('密码', 'password')
-                ->onlyOnForms()
-                ->creationRules('required', 'string', 'min:6')
-                ->updateRules('nullable', 'string', 'min:6'),
+            BelongsTo::make('User')->searchable(),
 
-            BelongsToMany::make('角色', 'roles', Role::class),
+            DateTime::make('创建时间', 'created_at')->sortable()->onlyOnDetail(),
 
-            HasMany::make('Posts'),
+            DateTime::make('更新时间', 'updated_at')->sortable()->exceptOnForms(),
         ];
     }
 
@@ -122,5 +114,16 @@ class User extends Resource
     public function actions(Request $request)
     {
         return [];
+    }
+
+    protected function seoFields()
+    {
+        return [
+            Text::make('SEO 标题', 'seo_title')->hideFromIndex(),
+
+            Tags::make('SEO 关键词')->type('seo_keywords')->hideFromIndex(),
+
+            Textarea::make('SEO 描述', 'seo_description')->hideFromIndex(),
+        ];
     }
 }

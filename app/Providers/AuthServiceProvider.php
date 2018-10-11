@@ -2,18 +2,22 @@
 
 namespace App\Providers;
 
+use App\Models\User;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Silvanite\Brandenburg\Traits\ValidatesPermissions;
 
 class AuthServiceProvider extends ServiceProvider
 {
+    use ValidatesPermissions;
+
     /**
      * The policy mappings for the application.
      *
      * @var array
      */
     protected $policies = [
-        'App\Model' => 'App\Policies\ModelPolicy',
+        'App\Models\Post' => 'App\Policies\PostPolicy',
     ];
 
     /**
@@ -23,8 +27,18 @@ class AuthServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->registerPolicies();
+        collect([
+                    'viewPosts',
+                    'managePosts',
+                ])->each(function ($permission) {
+            Gate::define($permission, function (User $user) use ($permission) {
+                if ($this->nobodyHasAccess($permission)) {
+                    return true;
+                }
 
-        //
+                return $user->hasRoleWithPermission($permission);
+            });
+        });
+        $this->registerPolicies();
     }
 }
