@@ -10,6 +10,7 @@ use Laravel\Nova\Cards\Help;
 use Illuminate\Support\Facades\Gate;
 use Laravel\Nova\NovaApplicationServiceProvider;
 use Silvanite\NovaToolPermissions\NovaToolPermissions;
+use Vink\CacheCard\CacheCard;
 
 class NovaServiceProvider extends NovaApplicationServiceProvider
 {
@@ -60,7 +61,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
     protected function cards()
     {
         return [
-            new Help,
+            new CacheCard,
         ];
     }
 
