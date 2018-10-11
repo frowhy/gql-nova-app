@@ -12,6 +12,7 @@
     "require": {
         "php": "^7.1.3",
         "barryvdh/laravel-cors": "^0.11.2",
+        "beyondcode/nova-tinker-tool": "^1.0",
         "cloudstudio/resource-generator": "^1.0",
         "ebess/advanced-nova-media-library": "^0.2.1",
         "epartment/nova-dependency-container": "^1.1",

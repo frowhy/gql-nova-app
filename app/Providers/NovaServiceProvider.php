@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Beyondcode\TinkerTool\Tinker;
 use Cloudstudio\ResourceGenerator\ResourceGenerator;
 use Infinety\Filemanager\FilemanagerTool;
 use Laravel\Nova\Nova;
@@ -74,6 +75,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
             new NovaToolPermissions(),
             new FilemanagerTool(),
             new ResourceGenerator(),
+            new Tinker(),
         ];
     }
 
