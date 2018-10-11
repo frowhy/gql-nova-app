@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Infinety\Filemanager\FilemanagerTool;
 use Laravel\Nova\Nova;
 use Laravel\Nova\Cards\Help;
 use Illuminate\Support\Facades\Gate;
@@ -28,9 +29,9 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
     protected function routes()
     {
         Nova::routes()
-                ->withAuthenticationRoutes()
-                ->withPasswordResetRoutes()
-                ->register();
+            ->withAuthenticationRoutes()
+            ->withPasswordResetRoutes()
+            ->register();
     }
 
     /**
@@ -70,6 +71,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
     {
         return [
             new NovaToolPermissions(),
+            new FilemanagerTool(),
         ];
     }
 
