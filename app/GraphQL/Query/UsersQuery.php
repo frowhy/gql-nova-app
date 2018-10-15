@@ -7,6 +7,8 @@ use Folklore\GraphQL\Support\Query;
 use GraphQL\Type\Definition\ResolveInfo;
 use GraphQL\Type\Definition\Type;
 use GraphQL;
+use JWTAuth;
+use Tymon\JWTAuth\Exceptions\JWTException;
 
 class UsersQuery extends Query
 {
@@ -39,5 +41,14 @@ class UsersQuery extends Query
     public function resolve($root, $args, $context, ResolveInfo $info)
     {
         return User::paginate($args['take'] ?? 20, ['*'], 'page', $args['page'] ?? 0);
+    }
+
+    public function authenticated($root, $args, $context)
+    {
+        try {
+            return JWTAuth::parseToken()->authenticate() ? true : false;
+        } catch (JWTException $exception) {
+            return false;
+        }
     }
 }

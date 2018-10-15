@@ -38,7 +38,7 @@ class AuthTestMutation extends Mutation
     {
         try {
             return JWTAuth::parseToken()->authenticate() ? true : false;
-        } catch (JWTException $e) {
+        } catch (JWTException $exception) {
             return false;
         }
     }
